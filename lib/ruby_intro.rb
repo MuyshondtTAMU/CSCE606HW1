@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 #git status
-# git add -A
+# git add -A > add all modified files to staging area to update 
 # git commit -m "Description of work done"
-# git push
+# git push origin master
 
 # **************************************** Part 1 ****************************************
 
