@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#git status
+# git status
 # git add -A > add all modified files to staging area to update 
 # git commit -m "Description of work done"
 # git push origin master
@@ -15,13 +15,17 @@ in the correct directory: cd assignment and rspec is installed)
 =end
 def sum(arr)
   # YOUR CODE HERE
+  # check if length 0, return 0
   if arr.length == 0
     return 0
+  # check if length 1, return array element
   elsif arr.length == 1
     return arr[0]
+  # check if length 2, return sum of array elements
   elsif arr.length == 2
     return arr[0] + arr[1]
   else
+  # iteratively sum up array elements
     sum_of_array = 0
     arr.each { |num| sum_of_array += num }
     return sum_of_array
@@ -37,13 +41,18 @@ tests via: $ rspec -e '#max_2_sum' spec/part1_spec.rb
 =end
 def max_2_sum(arr)
   # YOUR CODE HERE
+  # if no elements in array, return 0
   if arr.length == 0
     return 0
+  # if only 1 array element, return element
   elsif arr.length == 1
     return arr[0]
+  # if 2 array elements, return their sum
   elsif arr.length == 2
     return arr[0] + arr[1]
   else
+  # sort array in ascending order, reverse array so biggest values are at beginning,
+  # return sum the first 2 values
     sort_arr = arr.sort
     rev_arr = sort_arr.reverse
     return rev_arr[0] + rev_arr[1]
@@ -64,6 +73,9 @@ def sum_to_n?(arr, number)
   elsif arr.length == 1
     return false
   else
+  # create exists array of all combinations of length '2' of elements of arr that 
+  # sum to the given variable number, put length of exists in variable num,
+  # if num is 0 then no combinations add up to number, otherwise a value does exist
     exists = arr.combination(2).select { | element | element.sum == number }
     num = exists.length
     if num == 0
@@ -95,6 +107,8 @@ via: $ rspec -e '#starts_with_consonant?' spec/part2_spec.rb
 =end
 def starts_with_consonant?(string)
   # YOUR CODE HERE
+  # regex expression to check if first character is any upper- or lower-case consonant
+  # AND check to make sure the character is not an upper- or lower-case vowel
   string =~ /\A[a-zA-Z&&[^aeiouAEIOU]]/
 end
 
@@ -106,8 +120,11 @@ associated tests via: $ rspec -e '#binary_multiple_of_4?' spec/part2_spec.rb
 =end
 def binary_multiple_of_4?(string)
   # YOUR CODE HERE
+  # regex to check if string is all 1's or 0's
   if string !~ /[^01]/
     string_length = string.length
+    # check to make sure last two elements of array are both 0, if so, then the 
+    # string is a multiple of 4
     if string[string_length - 1] == "0" && string[string_length - 2] == "0"
       return true
     else
@@ -147,16 +164,20 @@ class BookInStock
   #constructor
   def initialize(isbn, price)
     
+    # if either isbn is an empty string OR price is not above 0, then raise exception
     if (isbn.empty? || price <= 0)
-      raise(ArgumentError, "ISBN number is the empty string or if the price
+      raise(ArgumentError, "ISBN number is the empty string or the price
 is less than or equal to zero.")
     end
     
+    # assigned passed variables to the instance variables
     @isbn = isbn
     @price = Float(price)
   end
   
   def price_as_string
+    # To display floating point numbers we need to use %f
+    # Specify decimal places with: %0.2f
     return format_price = "$%0.2f" % [price]
   end
 end
